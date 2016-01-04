@@ -1,0 +1,26 @@
+{
+  "name": "limpia-plex",
+  "version": "0.0.1",
+  "description": "Limpia las carpetas vacías de las librerías Plex",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "shelljs": "^0.5.3",
+    "trash": "^3.4.1"
+  },
+  "files": [
+    "limpiar.js",
+    "binEntry.js"
+  ],
+  "bin": "binEntry.js",
+  "preferGlobal": true,
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "scripts": {
+    "prepublish": "coffee -c limpiar.coffee",
+    "version": "npm run prepublish"
+  },
+  "author": "Carlos Precioso",
+  "private": true,
+  "license": "UNLICENSED"
+}
