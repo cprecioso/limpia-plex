@@ -14,6 +14,7 @@ It also keeps `torrent` and `part` files safe, just in case.
 - Supports custom extensions. Have a lot of video files in an obscure format? Well this is your day then, just write `limpia-plex -e mvf "My Library"` (*macarena video file*). Want it supported out-of-the-box? [Open an issue](https://github.com/cprecioso/limpia-plex/issues/new)
 - **Moves to trash**, doesn't remove directly. The best if you have trust issues.
 - Great, informative, colorful output.
+- It actually has an API! Self-documentative, though 😁.
 - Actually compatible with plain folder trees, no need for Plex, if you're that organized. Therefore, possibly compatible with XMBC or other media managers.
 - Tested in Mac, should be compatible with Windows and Linux (and their trash folders).
 

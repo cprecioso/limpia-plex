@@ -8,6 +8,7 @@
     "shelljs": "^0.5.3",
     "trash": "^3.4.1"
   },
+  "main": "limpiar.js",
   "files": [
     "limpiar.js",
     "binEntry.js"
