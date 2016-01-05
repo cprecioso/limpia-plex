@@ -1,6 +1,6 @@
 {
   "name": "limpia-plex",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Cleans folders with no video files in Plex libraries.",
   "dependencies": {
     "colors": "^1.1.2",
