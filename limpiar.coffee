@@ -26,26 +26,41 @@ exports.run = (argv) ->
 			process.exit 1
 
 exports.parse = (argv) -> new Promise (fulfill, reject) ->
-	exts = "mp4,m4v,mkv,avi,part,torrent"
 	program._name = pkginfo.name
-	{args, extensions, verbose, debug} = program
+	{args, extensions, verbose, debug, list} = program
 		.version pkginfo.version
 		.description pkginfo.description
 		.arguments "<dirs...>"
 		.option "-v, --verbose",
-			"Enable verbose mode"
+			"enable verbose mode"
 		.option "-d, --debug",
-			"Enable debug mode"
+			"enable debug mode"
 		.option "-e, --extensions [exts]",
-			"Extensions to consider as video. Default: #{exts}",
+			"list of additional extensions to consider as video",
 			((exts) -> exts.trim().split(","))
+		.option "-l, --list",
+			"lists currently supported extensions"
 		.parse argv
 	
-	fulfill
-		dirs: if args?.length > 0 then args else program.outputHelp(); reject "Please specify the Plex library folder(s)"
-		exts: if extensions?.length > 0 then extensions else exts.split ","
+	args =
+		dirs: args
+		exts: require("./extensions.json")
 		verbose: !!verbose
 		debug: !!debug
+		list: !!list
+	
+	args.exts.concat extensions if extensions?.length > 0
+	
+	if args.list
+		for ext in args.exts
+			console.log ext
+		process.exit()
+	
+	if args.dirs.length is 0
+		program.outputHelp()
+		reject "Please specify the Plex library folder(s)"
+	
+	fulfill args
 
 exports.assess = (opts) -> new Promise (fulfill) ->
 	{dirs, exts} = opts

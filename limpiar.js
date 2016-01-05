@@ -52,18 +52,34 @@
 
   exports.parse = function(argv) {
     return new Promise(function(fulfill, reject) {
-      var args, debug, extensions, exts, ref, verbose;
-      exts = "mp4,m4v,mkv,avi,part,torrent";
+      var args, debug, ext, extensions, i, len, list, ref, ref1, verbose;
       program._name = pkginfo.name;
-      ref = program.version(pkginfo.version).description(pkginfo.description)["arguments"]("<dirs...>").option("-v, --verbose", "Enable verbose mode").option("-d, --debug", "Enable debug mode").option("-e, --extensions [exts]", "Extensions to consider as video. Default: " + exts, (function(exts) {
+      ref = program.version(pkginfo.version).description(pkginfo.description)["arguments"]("<dirs...>").option("-v, --verbose", "enable verbose mode").option("-d, --debug", "enable debug mode").option("-e, --extensions [exts]", "list of additional extensions to consider as video", (function(exts) {
         return exts.trim().split(",");
-      })).parse(argv), args = ref.args, extensions = ref.extensions, verbose = ref.verbose, debug = ref.debug;
-      return fulfill({
-        dirs: (args != null ? args.length : void 0) > 0 ? args : (program.outputHelp(), reject("Please specify the Plex library folder(s)")),
-        exts: (extensions != null ? extensions.length : void 0) > 0 ? extensions : exts.split(","),
+      })).option("-l, --list", "lists currently supported extensions").parse(argv), args = ref.args, extensions = ref.extensions, verbose = ref.verbose, debug = ref.debug, list = ref.list;
+      args = {
+        dirs: args,
+        exts: require("./extensions.json"),
         verbose: !!verbose,
-        debug: !!debug
-      });
+        debug: !!debug,
+        list: !!list
+      };
+      if ((extensions != null ? extensions.length : void 0) > 0) {
+        args.exts.concat(extensions);
+      }
+      if (args.list) {
+        ref1 = args.exts;
+        for (i = 0, len = ref1.length; i < len; i++) {
+          ext = ref1[i];
+          console.log(ext);
+        }
+        process.exit();
+      }
+      if (args.dirs.length === 0) {
+        program.outputHelp();
+        reject("Please specify the Plex library folder(s)");
+      }
+      return fulfill(args);
     });
   };
 
