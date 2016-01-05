@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("./limpiar.js");
+require("./limpiar.js").run(process.argv);
