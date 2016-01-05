@@ -1,7 +1,7 @@
 {
   "name": "limpia-plex",
   "version": "0.0.1",
-  "description": "Limpia las carpetas vacías de las librerías Plex",
+  "description": "Cleans folders with no video files in Plex libraries.",
   "dependencies": {
     "colors": "^1.1.2",
     "shelljs": "^0.5.3",

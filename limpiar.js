@@ -34,10 +34,6 @@
     }
   }
 
-  if (searchFor.length === 0) {
-    searchFor = ["Películas", "Series"];
-  }
-
   toRemove = [];
 
   ref2 = ls(currentDir);

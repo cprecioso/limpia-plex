@@ -16,8 +16,6 @@ for arg in args
 			when "-v", "--verbose" then verbose = true
 	else searchFor.push arg
 
-searchFor = ["Películas", "Series"] if searchFor.length is 0
-
 toRemove = []
 
 for rootFolder in ls currentDir when rootFolder in searchFor
